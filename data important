@@ -22,3 +22,20 @@ The down point of trend projection is that it does not address the underlying pr
 In this technique of Demand Forecasting, current events are recorded for the prediction of the future. In the Demand Forecasting process, this is accomplished by having a look at the economic indicators. Mainly, a demographic evaluation like the Leading series, Lagging series, or Concurrent series is arranged to generate the Demand Forecast.
 
 The barometric forecasting technique’s upside is that it solves the issue of identifying the value of an individual variable. A significant disadvantage of this method is that we can’t use it for long-term forecasting.
+
+
+Como comprobar que el sistema funcione
+
+Realizar una analisis de datos outliers.
+
+Centrar datos de demanda y precios con una varianza conservadora? o riesgosa?
+
+Valor de inflacion constante a los anteriores. 
+
+Realizar un sistema de regresion lineal basado en las series de tiempo
+
+Target es Precio_Prom o demanda
+
+Variables Descuento, inflacion, oferta, Popularidad del producto?, 
+
+margen, utilidad y elasticidad creo que no deberian de agregarse -> Prediccion de ventas
