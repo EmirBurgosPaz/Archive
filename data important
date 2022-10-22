@@ -41,3 +41,38 @@ Variables Descuento, inflacion, oferta, Popularidad del producto?,
 margen, utilidad y elasticidad creo que no deberian de agregarse -> Prediccion de ventas
 
 link interenate: https://mobidev.biz/blog/machine-learning-methods-demand-forecasting-retail
+
+
+Functionality
+
+Obviously, the first thing you have to look at is whether it fits your business requirements. Depending on your industry and business model, you might need
+
+    short-term or long-term predictions (or both);
+    demand forecasting for new products;
+    multitiered planning for different regions, channels, and product groups;
+    price elasticity estimation;
+    multidimensional modeling and comparisons of what-if scenarios (for promotions, price changes, market fluctuations, display variations, assortment changes, etc.);
+    accounting for halo effects and product cannibalization (when demand fluctuations of one product impact complementary or competitive items);
+    granular dashboards and reports, and so on.
+
+
+Predict price elasticity and then prredict demand
+
+https://neptune.ai/blog/anomaly-detection-in-time-series
+
+https://towardsdatascience.com/anomaly-detection-in-time-series-sensor-data-86fd52e62538
+
+Predictive BDA applicability
+Most data-driven models used in the literature consider historical data. Such a back-
+ward-looking forecasting ignores the new trends and highs and lows in different eco-
+nomic environments. Also, organizational factors, such as reputation and marketing
+strategies, as well as internal risks (related to availability of SCM resources), could
+greatly influence the demand [107] and thus contribute to inaccuracy of BDA-based
+demand predictions using historical data. Incorporating existing driving factors out-
+side the historical data, such as economic instability, inflation, and purchasing power,
+could help adjust the predictions with respect to unseen future scenarios of demand.
+Combining predictive algorithms with optimization or simulation can equip the mod-
+els with prescriptive capabilities in response to future scenarios and expectations.
+
+
+https://towardsdatascience.com/machine-learning-for-store-demand-forecasting-and-inventory-optimization-part-1-xgboost-vs-9952d8303b48
