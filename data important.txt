@@ -113,5 +113,5 @@ https://www.datatechnotes.com/2019/02/regression-model-accuracy-mae-mse-rmse.htm
 https://www.statology.org/rmse-vs-r-squared/
 
 
-
+https://www.python-graph-gallery.com/
 https://github.com/gbroques/association-analysis/blob/master/Introduction%20to%20Market%20Basket%20Analysis%20in%C2%A0Python%20-%20Practical%20Business%20Python.pdf
