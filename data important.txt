@@ -115,3 +115,10 @@ https://www.statology.org/rmse-vs-r-squared/
 
 https://www.python-graph-gallery.com/
 https://github.com/gbroques/association-analysis/blob/master/Introduction%20to%20Market%20Basket%20Analysis%20in%C2%A0Python%20-%20Practical%20Business%20Python.pdf
+
+
+
+    Popular Product Recommendation: This algorithm makes item referrals to customers based on the popularity of the given item.
+    Content Filtering: This recommendation algorithm tries to generate a customer profile based on behavior (e.g rating). It tries to generate recommendations for a customer based on their activity patterns.
+    Collaborative Filtering: Makes recommendations to a customer by collecting preferences or activity pattern information from other similar customers.
+    Association Rules: Association rule is different from other methods because it tries to answer the question — “What items frequently appear together”.
