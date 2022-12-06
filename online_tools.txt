@@ -8,3 +8,6 @@ https://unsplash.com/es
 https://art.aiseo.ai/
 
 https://www.youtube.com/watch?v=s-32u6XdY7c&t=294s
+
+https://stackoverflow.com/questions/54544285/is-it-possible-to-do-multivariate-multi-step-forecasting-using-fb-prophet
+https://www.kaggle.com/code/bagavathypriya/multivariate-time-series-using-fb-prophet
