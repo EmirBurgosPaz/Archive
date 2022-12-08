@@ -10,9 +10,9 @@ import plotly.graph_objects as go
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-        html.H1("Change the value in the text box to see callbacks in action!"),
+        html.H1("Escribe un valor para modificar la grafica"),
         html.H3([
-        "Input: ",
+        "Valor: ",
         dcc.Input(id='lambda', value=1, type='text')
         ]),
     html.Hr(),
@@ -40,8 +40,12 @@ def graph_histogram(lambda_value):
             sales[index] = item * float(lambda_value)
             #print(lambda_value)
         fig =make_subplots(rows=2, cols=1)
-        fig.append_trace(go.Scatter(x=s,y=sales),1,1)
-        fig.append_trace(go.Scatter(x=s,y=sales_2),1,1)
+        fig.append_trace(go.Scatter(x=s,y=sales,marker= dict(
+                color="#9e2f7f"
+                )),1,1)
+        fig.append_trace(go.Scatter(x=s,y=sales_2,marker= dict(
+                color="#e75263"
+                )),1,1)
         fig.update_layout(paper_bgcolor="#1d2228",plot_bgcolor="#1d2228",
                         font=dict(
                             family="Courier New, monospace",
