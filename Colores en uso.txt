@@ -1,0 +1,7 @@
+background = #1d2228
+button baclgraound = #49bf9d
+text color = #fb8122
+
+red color= #cf1020
+green color = #296E01
+blue color = #32527B
