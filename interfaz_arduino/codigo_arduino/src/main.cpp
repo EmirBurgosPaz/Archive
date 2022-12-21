@@ -26,20 +26,20 @@ void nextionCommand(String nextionName, long value);
 void setup() {
   SerialNextion.begin(9600);                       //The default baud rate of the Nextion TFT is 9600.         
   Serial.begin(9600);
+
   pinMode(LED_BUILTIN, OUTPUT); 
   pinMode(ledRojo,OUTPUT);
   pinMode(ledVerde,OUTPUT);
   pinMode(ledAzul,OUTPUT);
-  pinMode(13, OUTPUT); 
 
   analogWrite(ledRojo,red_value); 
   analogWrite(ledVerde,green_value); 
   analogWrite(ledAzul,ledAzul); 
+  digitalWrite(LED_BUILTIN, LOW);
 
 }
 
 void loop() {
-digitalWrite(13, LOW);
 
 if(SerialNextion.available()>0)                  //If we receive something...
   {
