@@ -4,11 +4,13 @@ os.environ["PATH"] += os.pathsep + "C:/Program Files (x86)/Graphviz/bin"
 from diagrams import Diagram
 from diagrams.c4 import Person, Container, Database, System, SystemBoundary, Relationship, Code
 
+#Diagrama avanzado del sistema
 
 
 graph_attr = {
     "splines": "spline",
 }
+
 
 with Diagram("Interfaz Arduino-Nextion", direction="TB", graph_attr=graph_attr):
     customer = Person(name="Usuario", description="Usuario del sistema")
