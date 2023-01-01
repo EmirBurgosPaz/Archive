@@ -19,38 +19,34 @@ RTC_DS3231 RTC;
 
 String dfd;
 byte lastMin=0;
+byte lastSecond =0;
 
-
-unsigned int address_red = 0;
-unsigned int address_green = 1;
-unsigned int address_blue = 2;
-
-
-long red_value;
-long green_value;
-long blue_value;
 int motor_state = 0;
 int motor_state6 = 0;
 
 int alarmNumber = 0;
 
-int ledRojo = 9;
-int ledVerde = 10;
-int ledAzul = 11;
+const byte ledRojo = 9;
+const byte ledVerde = 10;
+const byte ledAzul = 11;
 
 
-unsigned long periodo = 2000;
+const unsigned long periodo = 2000;
 unsigned long TiempoAhora = 0;
 
-int NumeroElementosAlarma =4;
+const int NumeroElementosAlarma =4;
 
-unsigned int ArrayAddresHora[] = {6,7,8,9};
-unsigned int ArrayAddresMinuto[] = {12,13,14,15};
+const  int ArrayAddresHora[] = {6,7,8,9};
+const  int ArrayAddresMinuto[] = {12,13,14,15};
 
 int ArrayHoraAlarma[4];
 int ArrayMinutosAlarma[4];
 
 int alarmid=0;
+
+int ArrayRGB[3];
+const int ArrayRGBAddres[] = {0,1,2};
+const int NumeroElementosRGB = 3;
 
 int delayAsincronoMinuto[] = {0,0,0,0};
 int delayAsincronoHora[] = {0,0,0,0};
@@ -75,9 +71,11 @@ void setup() {
   pinMode(ledVerde,OUTPUT);
   pinMode(ledAzul,OUTPUT);
 
-  red_value = int(readEEPROM(disk1, address_red));
-  green_value = int(readEEPROM(disk1, address_green));
-  blue_value = int(readEEPROM(disk1, address_blue));
+ for( int i=0; i<NumeroElementosRGB; i++){
+    ArrayRGB[i] = readEEPROM(disk1, ArrayRGBAddres[i]);
+    Serial.println(ArrayRGB[i]);
+  }
+
 
   //for( int i=0; i<NumeroElementosAlarma; i++){
   //  writeEEPROM(disk1, ArrayAddresHora[i], ArrayHoraAlarma[i]);
@@ -89,9 +87,9 @@ void setup() {
     ArrayMinutosAlarma[i]= readEEPROM(disk1, ArrayAddresMinuto[i]);
   }
 
-  analogWrite(ledRojo,red_value); 
-  analogWrite(ledVerde,green_value); 
-  analogWrite(ledAzul,blue_value); 
+  analogWrite(ledRojo,ArrayRGB[0]); 
+  analogWrite(ledVerde,ArrayRGB[1]); 
+  analogWrite(ledAzul,ArrayRGB[2]); 
   digitalWrite(LED_BUILTIN, LOW);
 
   //writeEEPROM(disk1, address_red, 123);
@@ -111,12 +109,14 @@ void loop() {
 
 DateTime now = RTC.now();
 
-if(lastMin!=now.minute()){
+if(lastSecond!=now.second()){
+    if(lastMin != now.minute()){
+      Serial.print(now.hour());
+      Serial.print(':');
+      Serial.println(now.minute());
+      lastMin=now.minute();
+    }    
     
-    lastMin=now.minute();
-    Serial.print(now.hour());
-    Serial.print(':');
-    Serial.println(now.minute());
 
   for (int j = 0; j<NumeroElementosAlarma; j++){
     if((now.hour()==delayAsincronoHora[j]) & (now.minute()==delayAsincronoMinuto[j])) {
@@ -142,8 +142,7 @@ if(lastMin!=now.minute()){
     }
   }
 
-  
-
+  lastSecond=now.second();
 }
 
 if(SerialNextion.available()>0)                  //If we receive something...
@@ -237,8 +236,8 @@ if(SerialNextion.available()>0)                  //If we receive something...
 
     value.charByte[0]= char(dfd[3]);
 
-    red_value = value.valLong; 
-    analogWrite(ledRojo,red_value); 
+    ArrayRGB[0] = value.valLong; 
+    analogWrite(ledRojo,ArrayRGB[0]); 
     dfd="";
   }
 
@@ -246,8 +245,8 @@ if(SerialNextion.available()>0)                  //If we receive something...
 
     value.charByte[0]= char(dfd[5]);
 
-    green_value = value.valLong;  
-    analogWrite(ledVerde,green_value); 
+    ArrayRGB[1] = value.valLong;  
+    analogWrite(ledVerde,ArrayRGB[1]); 
 
     dfd="";
   }
@@ -256,8 +255,8 @@ if(SerialNextion.available()>0)                  //If we receive something...
 
     value.charByte[0]= char(dfd[4]);
 
-    blue_value = value.valLong;  
-    analogWrite(ledAzul,blue_value); 
+    ArrayRGB[2] = value.valLong;  
+    analogWrite(ledAzul,ArrayRGB[2]); 
 
     dfd="";
   }
@@ -314,25 +313,32 @@ if(SerialNextion.available()>0)                  //If we receive something...
 
   if ((dfd.substring(0,3)=="set") & (dfd.length()==3))
   {
-    red_value = int(readEEPROM(disk1, address_red));
-    green_value = int(readEEPROM(disk1, address_green));
-    blue_value = int(readEEPROM(disk1, address_blue));
+    for( int i=0; i<NumeroElementosRGB; i++){
+    ArrayRGB[i] = int(readEEPROM(disk1, ArrayRGBAddres[i]));
+    Serial.println(ArrayRGB[i]);
+    }
+    analogWrite(ledRojo,ArrayRGB[0]); 
+    analogWrite(ledVerde,ArrayRGB[1]); 
+    analogWrite(ledAzul,ArrayRGB[2]); 
 
-    analogWrite(ledRojo,red_value); 
-    analogWrite(ledVerde,green_value); 
-    analogWrite(ledAzul,blue_value); 
-
-    nextionCommand("h0.val", red_value);
-    nextionCommand("h1.val", green_value);
-    nextionCommand("h2.val", blue_value);
+    nextionCommand("h0.val", ArrayRGB[0]);
+    nextionCommand("h1.val", ArrayRGB[1]);
+    nextionCommand("h2.val", ArrayRGB[2]);
     dfd="";
   }
   
   if((dfd.substring(0,4)=="save")&(dfd.length()==4)){
 
-    writeEEPROM(disk1, address_red, int(red_value));
-    writeEEPROM(disk1, address_green, int(green_value));
-    writeEEPROM(disk1, address_blue, int(blue_value));
+    for( int i=0; i<NumeroElementosRGB; i++){
+    if((ArrayRGB[i] == readEEPROM(disk1, ArrayRGBAddres[i]))){
+      Serial.println("No se modifico");
+      Serial.println(i);
+      }
+    else{
+      writeEEPROM(disk1, ArrayRGBAddres[i], ArrayRGB[i]);
+      Serial.println("Guardado");
+      }
+    }
     
     dfd="";
   }
@@ -346,7 +352,8 @@ if(SerialNextion.available()>0)                  //If we receive something...
       }
     else{
       writeEEPROM(disk1, ArrayAddresHora[i], ArrayHoraAlarma[i]);
-      writeEEPROM(disk1, ArrayAddresMinuto[i], ArrayMinutosAlarma[i]);  
+      writeEEPROM(disk1, ArrayAddresMinuto[i], ArrayMinutosAlarma[i]);
+      Serial.println("Guardado");  
       }
     }
     dfd="";
